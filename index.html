@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harness Learning · Generalizable Test-Time Adaptation</title>
+  <meta name="description" content="Learning to revise executable harnesses from execution feedback. Research on generalizable test-time adaptation in reasoning and multi-hop question answering.">
+  <meta name="theme-color" content="#193b4b">
+  <meta property="og:title" content="Harness Learning Enables Generalizable Test-Time Adaptation">
+  <meta property="og:description" content="A learned revision model adapts the program around a frozen solver, using execution feedback from new tasks.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23193b4b'/%3E%3Cpath d='M9 8v16m14-16v16M9 16h14' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='23' cy='8' r='4' fill='%23b9233d'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+  <script src="animation.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="#top" aria-label="Harness Learning home"><span class="brand-symbol" aria-hidden="true">H<span></span></span>Harness Learning</a>
+    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a class="header-paper" href="https://arxiv.org/abs/2609.35738" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
+  <main id="main">
+    <div class="paper-header" id="top">
+      <h1><span>Harness Learning</span>Enables Generalizable Test-Time Adaptation</h1>
+      <div class="authors" aria-label="Authors in order"><span>Alvin Zhang<sup><a href="#contribution-note" aria-label="Equal contribution">*</a><a href="#project-lead-note" aria-label="Project lead">†</a></sup></span><span>Xuecheng Liu<sup><a href="#contribution-note" aria-label="Equal contribution">*</a></sup></span><span>Zixuan Wang<sup><a href="#contribution-note" aria-label="Equal contribution">*</a></sup></span><span>Fahim Tajwar</span><span>Daman Arora</span><span>Ruslan Salakhutdinov</span><span>Daniel Khashabi</span><span>Yuda Song<sup><a href="#equal-advising-note" aria-label="Equal advising">‡</a></sup></span><span>Andrea Zanette<sup><a href="#equal-advising-note" aria-label="Equal advising">‡</a></sup></span></div>
+      <p class="contribution-note" id="contribution-note">* Equal contribution. <span id="project-lead-note">† Project lead.</span> <span id="equal-advising-note">‡ Equal advising.</span></p>
+      <p class="paper-deck">Learning to revise the executable program around a language model,<br class="wide-only"> and applying that skill to new tasks with model weights fixed.</p>
+      <div class="affiliations" aria-label="Affiliations"><img src="assets/jhu-logo.png" width="1000" height="198" alt="Johns Hopkins University"><img src="assets/cmu-logo.png" width="3000" height="266" alt="Carnegie Mellon University"></div>
+      <div class="paper-actions"><a class="button" href="https://arxiv.org/abs/2609.35738" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>Paper on arXiv <span aria-hidden="true">↗</span></a><a class="secondary-link code-link" href="https://github.com/AlvinZH04/Harness-Learning/tree/main" target="_blank" rel="noopener" aria-label="Code on GitHub" title="Code will be added to this repository"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297C5.37.297 0 5.67 0 12.297c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.043-1.61-4.043-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.47-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.404c1.02.005 2.045.138 3 .404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a><a class="secondary-link" href="#results">Explore results <span aria-hidden="true">↓</span></a><a class="secondary-link" href="#citation">Cite this work</a></div>
+    </div>
+    <section class="opening-summary" aria-labelledby="opening-title">
+      <div class="adaptation-preview">
+        <div class="animation-heading"><p class="eyebrow">Harness learning in 39 seconds</p><a class="overview-link" href="assets/overview.png" target="_blank" rel="noopener">Paper overview ↗</a></div>
+        <h2 id="opening-title">Learn to revise code. Adapt to new tasks.</h2>
+        <div class="animation-chapters" role="group" aria-label="Explanation chapters" hidden><button type="button" data-chapter="0" aria-pressed="true"><span>01</span> Learn</button><button type="button" data-chapter="1" aria-pressed="false"><span>02</span> Revise</button><button type="button" data-chapter="2" aria-pressed="false"><span>03</span> Transfer</button></div>
+        <div class="animation-stage" data-scene="training" data-playing="false">
+          <h3 id="scene-title">Learn from execution outcomes</h3>
+          <canvas id="harness-animation" role="img" aria-label="Animated explanation of training a harness revision policy, changing evidence flow in a QA harness, and measured transfer to unseen tasks." aria-describedby="animation-description">During training, task performance rewards the proposer for revising harnesses. At test time, both models stay fixed while the proposer edits code. The example gives the answering call retrieved passages instead of summaries. Training raises mean revision score on 21 unseen reasoning families from 0.32 to 0.62. A QA proposer trained on HotpotQA reaches 0.27 mean MuSiQue exact match after ten revision rounds.</canvas>
+        </div>
+        <div class="animation-controls" hidden><button class="motion-toggle" type="button" aria-label="Pause explanation">Pause</button><input class="animation-timeline" type="range" min="0" max="39" step="0.1" value="0" aria-label="Animation progress"><span class="animation-time" aria-hidden="true">00 / 39 s</span><button class="motion-replay" type="button" aria-label="Replay explanation">Replay</button></div>
+        <p class="animation-caption">During training, revised harnesses run the frozen solver on task questions. Their performance supplies the reward for updating the proposer.</p>
+        <p class="animation-note" id="animation-description">The QA code is a simplified example from the paper. The final charts show aggregate experimental results. <a href="#results">Explore the full results ↓</a></p>
+      </div>
+      <div class="opening-results" aria-labelledby="key-results-title">
+        <h3 id="key-results-title" class="eyebrow">Key results on unseen tasks</h3>
+        <div class="opening-result"><p class="result-value"><span>0.32</span><span class="result-change" aria-label="to">→</span><strong>0.62</strong></p><p class="result-heading">Better individual revisions</p><p>Mean revision score on <a href="#results" data-result-target="reasoning-tab">21 unseen Reasoning Gym families</a>, from the base to the trained proposer.</p></div>
+        <div class="opening-result"><p class="result-value"><span>0.15</span><span class="result-change" aria-label="to">→</span><strong>0.27</strong></p><p class="result-heading">Further gains through revision</p><p><a href="#results" data-result-target="qa-tab">MuSiQue exact match</a>: an independent revision versus ten rounds, using a proposer trained on HotpotQA.</p></div>
+      </div>
+    </section>
+    <div class="reading-layout">
+      <aside class="contents"><nav aria-label="On this page"><p>On this page</p><a href="#abstract">Abstract</a><a href="#method">How it works</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#citation">Citation</a><a class="contents-paper" href="https://arxiv.org/abs/2609.35738" target="_blank" rel="noopener">Full paper ↗</a></nav></aside>
+      <div class="paper-body">
+        <section id="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p>A language-model agent is jointly defined by its model and its harness, the executable program that organizes model calls, tool use, and information flow. Because different tasks call for different ways of organizing these operations, the harness needs to be adapted using feedback from the task at hand. We introduce <em>harness learning</em>, which trains a proposer model to revise a solver’s harness using execution feedback. We formulate this process as meta-learning over executable programs, with harness revisions playing the role of weight updates in gradient-based adaptation. We train the proposer with reinforcement learning, using the task performance of revised harnesses as the reward. At test time, the proposer uses feedback from successive executions on a new task to refine the harness, without performing any parameter-space update. Experiments on reasoning and multi-hop question answering show that harness learning improves revision quality and that the ability to adapt at test time transfers to unseen tasks. Policies trained on individual revisions can continue improving harnesses over multiple rounds, while the benefits of training on revision sequences vary across settings. These findings suggest a path towards continually learning agents that turn accumulated experience into generalizable improvements.</p></section>
+        <section id="method" aria-labelledby="method-title"><h2 id="method-title">How harness learning works</h2><p>The harness determines how a solver calls tools, processes outputs, and continues or stops execution. We train a proposer to edit this executable program, conditioned on a task description, the current harness, and an execution report.</p><p>This gives harness learning a meta-learning interpretation: <strong>the harness is the adapted object, and the proposer is the learned adaptation rule.</strong></p><dl class="method-definition"><div><dt>During training</dt><dd>Task performance supplies the reward for reinforcement learning. The reasoning proposer begins with supervised fine-tuning on teacher revisions; the QA proposer trains directly with RL.</dd></div><div><dt>At test time</dt><dd>The proposer applies the learned revision skill to a new task. Repeated executions provide feedback for further edits. The harness changes, while both models’ parameters remain fixed.</dd></div></dl></section>
+        <section id="results" aria-labelledby="results-title"><h2 id="results-title">Results</h2><p>We evaluate two settings with <strong>separately trained proposers</strong>. Reasoning Gym tests transfer across diverse synthetic task families from a minimal seed harness. Multi-hop QA tests adaptation of an existing retrieval workflow.</p>
+          <div class="results-tabs" role="tablist" aria-label="Experimental setting"><button id="reasoning-tab" role="tab" aria-selected="true" aria-controls="reasoning-panel" tabindex="0">Reasoning Gym</button><button id="qa-tab" role="tab" aria-selected="false" aria-controls="qa-panel" tabindex="-1">Multi-hop QA</button></div>
+          <div id="reasoning-panel" class="result-panel" role="tabpanel" aria-labelledby="reasoning-tab" tabindex="0">
+            <h3>Better individual revisions on unseen families</h3><p>On 21 unseen task families, training raises the mean single-revision score from <strong>0.32 to 0.62</strong>. The gain appears in the mean over proposals, so it does not depend on selecting the best candidate. Under the same revision protocol, the trained 4B proposer also exceeds its 35B teacher on average, although the teacher achieves a higher oracle best-of-eight score.</p>
+            <figure><a href="assets/reasoning-results.png" target="_blank" rel="noopener" aria-label="Open the Reasoning Gym results at full size"><img src="assets/reasoning-results.png" width="2400" height="917" loading="lazy" alt="Three panels compare single-step revision scores on seen tasks, unseen tasks, and the average over 21 unseen families. Training improves the mean score from 0.32 to 0.62."></a><figcaption>Single-step revision on format-varied questions. Bars average eight proposals per family; the right panel averages 21 unseen families. Circles show oracle best-of-eight scores. <a href="assets/reasoning-results.png" target="_blank" rel="noopener">View full size ↗</a></figcaption></figure>
+            <p>Over successive rounds, proposers trained on individual revisions can continue improving harnesses. On format-varied questions, Single-step RL obtains most of its five-round gain in the first revision, while SFT improves more gradually.</p>
+          </div>
+          <div id="qa-panel" class="result-panel" role="tabpanel" aria-labelledby="qa-tab" tabindex="0" hidden>
+            <h3>Transfer through successive revision</h3><p>A proposer trained on HotpotQA transfers to MuSiQue and 2WikiMultihopQA. On both unseen benchmarks, the average final run of each RL proposer exceeds even the oracle best of 80 independent revisions of the seed. A small improvement from one revision can therefore coexist with substantial gains over successive rounds.</p>
+            <figure><a href="assets/qa-results.png" target="_blank" rel="noopener" aria-label="Open the question answering results at full size"><img src="assets/qa-results.png" width="2600" height="970" loading="lazy" alt="QA exact-match curves improve over ten revision rounds. On MuSiQue and 2WikiMultihopQA, sequential revisions outperform independent revisions of the seed harness."></a><figcaption>Left: exact match over ten rounds. Solid curves average four runs; dashed curves track the best across runs. Right: independent revisions (light bars) and final run scores (dark bars) on unseen benchmarks. Markers show the oracle best of 8, best of 80, and best over all rounds and runs. <a href="assets/qa-results.png" target="_blank" rel="noopener">View full size ↗</a></figcaption></figure>
+            <p class="protocol-note">Each run uses 80 proposals. The comparison matches proposals per run, while total compute and feedback are not matched. “Single-step RL” and “Multistep RL” identify training configurations; both can revise repeatedly at test time.</p>
+          </div>
+        </section>
+        <section id="analysis" aria-labelledby="analysis-title"><h2 id="analysis-title">What do the learned revisions change?</h2><h3>More reliable candidates</h3><p>RL reduces the fraction of failed or zero-scoring proposals in both settings. The trained proposer supplies more viable candidates to selection, which may help sustain progress across rounds.</p>
+          <div class="evidence-discussion"><figure class="evidence-figure"><a href="assets/evidence-revision.png" target="_blank" rel="noopener" aria-label="Open a learned QA revision at full size"><img src="assets/evidence-revision.png" width="700" height="1061" loading="lazy" alt="The answering call receives retrieved passages directly through a new red path, while summaries still guide retrieval."></a><figcaption>A learned QA revision. The new evidence path is shown in red.</figcaption></figure><h3>Changes to computation and information flow</h3><p>Reasoning harnesses commonly introduce interpreter loops, letting the solver express a computation as code and delegate its execution to the runtime.</p><p>In QA, a common revision keeps summaries to guide the next retrieval, while passing the original retrieved passages directly to the answering call. This separates the evidence needed to formulate a search from the evidence needed to answer.</p><p>These edits change how the harness organizes the solver’s work. Their transfer to unseen tasks suggests that execution outcomes can teach a reusable adaptation skill.</p></div>
+          <h3>Repeated adaptation from single-revision training</h3><p>Proposers trained on individual revisions remain useful after earlier edits change the harness and its execution reports. Training on revision sequences does not consistently improve on training on individual revisions. This leaves open whether different intermediate training examples or credit assignment across rounds could make longer revision chains more effective.</p>
+        </section>
+        <section id="citation" aria-labelledby="citation-title">
+          <div class="citation-heading"><h2 id="citation-title">Cite this work</h2><div class="citation-actions"><button type="button" class="citation-copy" hidden>Copy BibTeX</button><a href="assets/harness-learning.bib" download>Download .bib</a></div></div>
+          <pre class="citation-code" tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{zhang2026harnesslearningenablesgeneralizable,
+  title={Harness Learning Enables Generalizable Test-Time Adaptation},
+  author={Alvin Zhang and Xuecheng Liu and Zixuan Wang and Fahim Tajwar and Daman Arora and Ruslan Salakhutdinov and Daniel Khashabi and Yuda Song and Andrea Zanette},
+  year={2026},
+  eprint={2609.35738},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2609.35738},
+}</code></pre>
+          <p class="citation-status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer><a href="#top">Harness Learning</a><p>Generalizable test-time adaptation through executable programs.</p><a href="https://arxiv.org/abs/2609.35738" target="_blank" rel="noopener">Paper on arXiv ↗</a></footer>
+</body>
+</html>
